@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.form-name {
+  background-color: orange;
+
+  .label-name {
+    color: white;
+  }
+}
