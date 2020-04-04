@@ -1,13 +1,145 @@
+$primary: orange;
+$secondary: yellow;
+$gray: gray;
+$white: white;
+
+
 :host {
   display: flex;
-  justify-content: space-between;
-  height: 20px;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .form-name {
   background-color: orange;
+  padding-bottom: none;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
 
   .label-name {
     color: white;
   }
 }
+
+.form-name {
+  position: relative;
+  padding: 15px 0 0;
+  width: 50%;
+}
+
+.form-field {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form-label {
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form-label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $white;
+}
+
+.form-field:focus {
+  ~ .form-label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: .8rem;
+    color: $white;
+  }
+  padding-bottom: 6px;
+  border-bottom: 2px solid white;
+}
+
+.fa-search {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  color: $white;
+  font-size: 1.2rem;
+}
+
+
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-light-grey: #E6E6E6;
+$color-grey: #CCCCCC;
+$color-dark-grey: #7B7B7B;
+$color-primary: #2AA1C0;
+$color-secondary: #0E647D;
+
+
+
+.select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+
+  select {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px 15px;
+    outline: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: $color-light-grey;
+    color: $color-dark-grey;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:hover,
+    &:focus {
+      color: $color-black;
+      background: $color-grey;
+    }
+
+  }
+
+.select__arrow {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0 5px;
+  border-color: $color-dark-grey transparent transparent transparent;
+
+  .select select:hover ~ &,
+  .select select:focus ~ & {
+    border-top-color: $color-black;
+  }
+}
+

@@ -1,0 +1,38 @@
+$header-color: purple;
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: $header-color;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 5px;
+}
+
+.col-name {
+  flex-basis: 35%;
+}
+
+.col-network {
+  flex-basis: 25%;
+}
+
+.col-season,
+.col-year {
+  flex-basis: 20%;
+}
+
+.sort-arrow {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  :hover {
+    color: lighten($header-color, 30%);
+  }
+}

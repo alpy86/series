@@ -1,18 +1,45 @@
-<mat-form-field class="form-name" >
+<!-- <mat-form-field class="form-name" >
   <mat-label class="label-name">Name</mat-label>
   <input matInput class="input-name" type="text" placeholder="Search name of series">
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Genre</mat-label>
+</mat-form-field> -->
+
+
+<!-- <mat-form-field class="form-name" appearance="fill">
+  <mat-label class="label-name">Genre</mat-label>
   <mat-select>
     <mat-option value="option">Option</mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Premiere Year</mat-label>
+<mat-form-field class="form-name" appearance="fill">
+  <mat-label class="label-name">Premiere Year</mat-label>
   <mat-select>
     <mat-option value="option">Option</mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field> -->
 
 <!-- [(ngModel)]="inputSearch" -->
+
+<div class="form-name">
+  <input type="text" #inputTag class="form-field" placeholder="Name" name="name" [(ngModel)]="searchName">
+  <label for="name" class="form-label">Name</label>
+  <i class="fas fa-search"></i>
+</div>
+
+<div class="select">
+  <select>
+    <option value="hide">Genre</option>
+    <option>First select</option>
+    <option>Option</option>
+    <option>Option</option>
+  </select>
+  <div class="select__arrow"></div>
+</div>
+
+<div class="select">
+  <select>
+    <option>First select</option>
+    <option>Option</option>
+    <option>Option</option>
+  </select>
+  <div class="select__arrow"></div>
+</div>

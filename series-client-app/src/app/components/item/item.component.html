@@ -1,1 +1,12 @@
-<p>item works!</p>
+<div class="box-name-genres">
+  <div class="series-name">{{ dataSeries.name }}</div>
+  <div class="box-genres">
+    <span class="list-values" *ngFor="let genre of listGenres">{{ genre }}</span>
+  </div>
+</div>
+<div class="series-season">{{ dataSeries.season }}</div>
+<div class="series-networks">
+  <span class="list-values" *ngFor="let network of listNetworks">{{ network }}</span>
+</div>
+<div class="series-premiere">{{ dataSeries.premiere }}</div>
+

@@ -1,2 +1,2 @@
-<app-item ></app-item>
+<app-item *ngFor="let dataItem of listSeries" [dataSeries] = "dataItem"></app-item>
 <!-- *ngFor="let cardItem of searchedList" [cardData] = "cardItem" -->

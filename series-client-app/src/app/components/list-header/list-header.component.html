@@ -1,1 +1,28 @@
-<p>list-header works!</p>
+<div class="column-header col-name">
+  <span>Name</span>
+  <span class="sort-arrow">
+    <i class="fas fa-angle-up" (click)="sortDataName('up')"></i>
+    <i class="fas fa-angle-down" (click)="sortDataName('down')"></i>
+  </span>
+</div>
+<div class="column-header col-season">
+  <span>Season</span>
+  <span class="sort-arrow">
+    <i class="fas fa-angle-up" (click)="sortDataSeason('up')"></i>
+    <i class="fas fa-angle-down" (click)="sortDataSeason('down')"></i>
+  </span>
+</div>
+<div class="column-header col-network">
+  <span>Network</span>
+  <span class="sort-arrow">
+    <i class="fas fa-angle-up" (click)="sortDataNetwork('up')"></i>
+    <i class="fas fa-angle-down" (click)="sortDataNetwork('down')"></i>
+  </span>
+</div>
+<div class="column-header col-year">
+  <span>Premiere</span>
+  <span class="sort-arrow">
+    <i class="fas fa-angle-up" (click)="sortDataPremiere('up')"></i>
+    <i class="fas fa-angle-down" (click)="sortDataPremiere('down')"></i>
+  </span>
+</div>
