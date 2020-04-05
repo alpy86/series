@@ -16,7 +16,7 @@
     },
     {
       "name": "Preacher",
-      "genre": [ "drama", "dark comedy" ],
+      "genre": [ "drama", "comedy" ],
       "season": 3,
       "network": [ "FOX", "AMC" ],
       "premiere": "01.01.2019"
@@ -89,7 +89,7 @@
       "genre": [ "crime", "drama", "thriller" ],
       "season": 10,
       "network": [ "FOX"],
-      "premiere": "5.08.2002"
+      "premiere": "05.08.2002"
     },
     {
       "name": "The Sopranos",

@@ -1,11 +1,11 @@
-<div class="column-header col-name">
-  <span>Name</span>
+<div class="column-header" *ngFor="let column of listColumns" [ngClass]="column.class">
+  <span>{{ column.name | titlecase }}</span>
   <span class="sort-arrow">
-    <i class="fas fa-angle-up" (click)="sortDataName('up')"></i>
-    <i class="fas fa-angle-down" (click)="sortDataName('down')"></i>
+    <i class="fas fa-angle-up" (click)="sortData(column.type, column.name, 'up')"></i>
+    <i class="fas fa-angle-down" (click)="sortData(column.type, column.name, 'down')"></i>
   </span>
 </div>
-<div class="column-header col-season">
+<!-- <div class="column-header col-season">
   <span>Season</span>
   <span class="sort-arrow">
     <i class="fas fa-angle-up" (click)="sortDataSeason('up')"></i>
@@ -15,8 +15,8 @@
 <div class="column-header col-network">
   <span>Network</span>
   <span class="sort-arrow">
-    <i class="fas fa-angle-up" (click)="sortDataNetwork('up')"></i>
-    <i class="fas fa-angle-down" (click)="sortDataNetwork('down')"></i>
+    <i class="fas fa-angle-up" (click)="sortDataByString('network', 'up')"></i>
+    <i class="fas fa-angle-down" (click)="sortDataByString('network', 'down')"></i>
   </span>
 </div>
 <div class="column-header col-year">
@@ -25,4 +25,4 @@
     <i class="fas fa-angle-up" (click)="sortDataPremiere('up')"></i>
     <i class="fas fa-angle-down" (click)="sortDataPremiere('down')"></i>
   </span>
-</div>
+</div> -->

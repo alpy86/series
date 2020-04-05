@@ -1,7 +1,7 @@
 <div class="box-name-genres">
   <div class="series-name">{{ dataSeries.name }}</div>
   <div class="box-genres">
-    <span class="list-values" *ngFor="let genre of listGenres">{{ genre }}</span>
+    <span class="list-values" *ngFor="let genre of listGenres" [ngClass]="genre">{{ genre }}</span>
   </div>
 </div>
 <div class="series-season">{{ dataSeries.season }}</div>

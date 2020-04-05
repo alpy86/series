@@ -1,3 +1,6 @@
 <app-list-header></app-list-header>
-<app-items-list></app-items-list>
-<app-list-footer></app-list-footer>
+<app-item *ngFor="let dataItem of (listSeries | slice: lowValue : highValue)" [dataSeries]="dataItem">
+</app-item>
+<mat-paginator [length]="listSeries.length" pageSize=10 (page)="getPaginatorData($event)"
+  [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons="true">
+</mat-paginator>

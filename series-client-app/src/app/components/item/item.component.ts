@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { DataSeries } from 'src/app/models/list-series';
+import { IDataSeries } from 'src/app/models/list-series.model';
 
 @Component({
   selector: 'app-item',
@@ -9,7 +9,7 @@ import { DataSeries } from 'src/app/models/list-series';
 })
 
 export class ItemComponent implements OnInit {
-  @Input() public dataSeries: DataSeries;
+  @Input() public dataSeries: IDataSeries;
 
   public listGenres: Array<string>;
   public listNetworks: Array<string>;
@@ -22,5 +22,4 @@ export class ItemComponent implements OnInit {
     this.listGenres = this.dataSeries.genre;
     this.listNetworks = this.dataSeries.network;
   }
-
 }

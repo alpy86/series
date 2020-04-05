@@ -1,98 +1,77 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSeries } from 'src/app/models/list-series';
+import { IDataSeries, HeaderColumns, ColumnsType, IListColumns } from 'src/app/models/list-series.model';
 import { GetListService } from 'src/app/services/get-list.service';
+import { ListColumns } from './list-header.config';
 
 @Component({
   selector: 'app-list-header',
   templateUrl: './list-header.component.html',
   styleUrls: ['./list-header.component.scss']
 })
+
 export class ListHeaderComponent implements OnInit {
-  private response: DataSeries[];
-  private changedResponse: DataSeries[];
+  public listColumns: IListColumns[] = ListColumns;
+  private listSeries: IDataSeries[];
 
   constructor (private getListService: GetListService) { }
 
   ngOnInit(): void {
+    this.getListService.valueSeries.subscribe((data: Array<IDataSeries>) => {
+      this.listSeries = data;
+    });
   }
 
-  public sortDataName(directionSort: string): void {
-    this.response = this.getListService.getResponse();
-    this.changedResponse = this.response.sort((a, b) => {
+  public sortData(type: ColumnsType, name: HeaderColumns, directionSort: string): void {
+    let changedResponse: IDataSeries[];
+
+    if (type === ColumnsType.string) {
+      changedResponse = this.sortDataByString(name, directionSort, this.listSeries);
+    }
+    if (type === ColumnsType.number) {
+      changedResponse = this.sortDataByNumber(name, directionSort, this.listSeries);
+    }
+    if (type === ColumnsType.date) {
+      changedResponse = this.sortDataByDate(name, directionSort, this.listSeries);
+    }
+    this.getListService.transferData(changedResponse);
+  }
+
+  private sortDataByString(columnName: HeaderColumns, directionSort: string, arr: IDataSeries[]): IDataSeries[] {
+    return arr.sort((a, b) => {
       if (directionSort === "up") {
-        return a.name > b.name ? 1 : -1;
+        return a[columnName] > b[columnName] ? 1 : -1;
       }
       if (directionSort === "down") {
-        return a.name > b.name ? -1 : 1;
+        return a[columnName] > b[columnName] ? -1 : 1;
       };
     });
-
-    this.getListService.transferData(this.changedResponse);
   }
 
-  public sortDataSeason(directionSort: string): void {
-    this.response = this.getListService.getResponse();
-    this.changedResponse = this.response.sort((a, b) => {
+  private sortDataByNumber(columnName: HeaderColumns, directionSort: string, arr: IDataSeries[]): IDataSeries[] {
+    return arr.sort((a, b) => {
       if (directionSort === "up") {
-        return Number(a.season) - Number(b.season);
+        return Number(a[columnName]) - Number(b[columnName]);
       }
       if (directionSort === "down") {
-        return Number(b.season) - Number(a.season);
+        return Number(b[columnName]) - Number(a[columnName]);
       };
     });
-
-    this.getListService.transferData(this.changedResponse);
   }
 
-  public sortDataNetwork(directionSort: string): void {
-    this.response = this.getListService.getResponse();
-    this.changedResponse = this.response.sort((a, b) => {
+  private sortDataByDate(columnName: HeaderColumns, directionSort: string, arr: IDataSeries[]): IDataSeries[] {
+    return arr.sort((a, b) => {
       if (directionSort === "up") {
-        return a.network[0] > b.network[0] ? 1 : -1;
+        return this.changeDateFormat(a[columnName] as string) >
+        this.changeDateFormat(b[columnName] as string) ? 1 : -1;
       }
       if (directionSort === "down") {
-        return a.network[0] > b.network[0] ? -1 : 1;
+        return this.changeDateFormat(a[columnName] as string) >
+        this.changeDateFormat(b[columnName] as string) ? -1 : 1;
       };
     });
-
-    this.getListService.transferData(this.changedResponse);
   }
 
-  public sortDataPremiere(directionSort: string): void {
-    this.response = this.getListService.getResponse();
-    this.changedResponse = this.response.sort((a, b) => {
-      if (directionSort === "up") {
-        return a.premiere > b.premiere ? 1 : -1;
-      }
-      if (directionSort === "down") {
-        return a.premiere > b.premiere ? -1 : 1;
-      };
-    });
-
-    this.getListService.transferData(this.changedResponse);
+  private changeDateFormat(date: string) {
+    return Date.parse(date.split(".").reverse().join('-'));
   }
-
-
-
-  // public getSortCardsByViews(): void {
-  //   this.response = this.httpService.getResponse();
-
-  //   this.responseDetails = this.response.items.sort((a, b) =>
-  //     Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
-
-  //   this.httpService.transferData(this.responseDetails);
-  // }
-
-  // public getSortCardsByWord(value: string): void {
-  //   this.response = this.httpService.getResponse();
-
-  //   if (!value) {
-  //     this.responseDetails = this.response.items;
-  //   } else {
-  //     this.responseDetails = this.response.items.filter(
-  //       (el) => el.snippet.title.toLowerCase().indexOf(value.toLowerCase()) > 0);
-  //   }
-
-  //   this.httpService.transferData(this.responseDetails);
-  // }
 }

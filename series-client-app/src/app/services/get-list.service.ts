@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, EMPTY } from 'rxjs';
-import { catchError, pluck, filter, switchMap, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 
-import { DataSeries, ListSeries } from '../models/list-series';
+import { IDataSeries, IListSeries } from 'src/app/models/list-series.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,44 +10,24 @@ import { DataSeries, ListSeries } from '../models/list-series';
 
 export class GetListService {
   private listSeriesUrl: string = 'assets/series.json';
-  public response: DataSeries[];
-  public valueSeries$: BehaviorSubject<Array<DataSeries>> = new BehaviorSubject<Array<DataSeries>>([]);
-  public valueSeries: Observable<Array<DataSeries>> = this.valueSeries$.asObservable();
+  public response: IDataSeries[];
+  public valueSeries$: BehaviorSubject<Array<IDataSeries>> = new BehaviorSubject<Array<IDataSeries>>([]);
+  public valueSeries: Observable<Array<IDataSeries>> = this.valueSeries$.asObservable();
 
   constructor(private http: HttpClient) { }
 
   public getListSeries(): void {
-    this.http.get(this.listSeriesUrl).subscribe((data: ListSeries) => {
+    this.http.get(this.listSeriesUrl).subscribe((data: IListSeries) => {
       this.valueSeries$.next(data.list);
       this.response = data.list;
     });
   }
 
-  public getResponse(): DataSeries[] {
+  public getResponse(): IDataSeries[] {
     return this.response;
   }
 
-  public transferData(value: Array<DataSeries>): void {
+  public transferData(value: Array<IDataSeries>): void {
     this.valueSeries$.next(value);
   }
 }
-
-// export class GetListService {
-//   private listSeriesUrl: string = 'assets/series.json';
-//   public valueSeries$: BehaviorSubject<Array<DataSeries>> = new BehaviorSubject<Array<DataSeries>>([]);
-//   public valueSeries: Observable<Array<DataSeries>> = this.valueSeries$.asObservable();
-
-//   constructor(private http: HttpClient) { }
-
-//   public getListSeries(): Observable<unknown> {
-
-//     return this.http.get(this.listSeriesUrl)
-//       .pipe (
-//         pluck('list'),
-//         catchError((err) => {
-//           console.log(err);
-//           return EMPTY;
-//         })
-//       )
-//   }
-// }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter, map, distinctUntilChanged } from 'rxjs/operators';
-import { DataSeries } from 'src/app/models/list-series';
+import { IDataSeries } from 'src/app/models/list-series.model';
 import { GetListService } from 'src/app/services/get-list.service';
 
 @Component({
@@ -13,20 +13,22 @@ export class FilterComponent implements OnInit {
   @ViewChild('inputTag', { static: false }) public inputElem: ElementRef;
 
   public searchName: string;
-  private response: DataSeries[];
-  private changedResponse: DataSeries[];
-  public listSeries: Array<DataSeries>;
+  private response: IDataSeries[];
+  private changedResponse: IDataSeries[];
+  public listSeries: Array<IDataSeries>;
   public listGenres: Array<string>;
   public listDates: Array<any>;
   public date: string | number;
   public genre: string;
   private firstCounter: number = 0;
   private secondCounter: number = 0;
+  private selectedGenre: string;
+  private selectedDate: string;
 
   constructor (private getListService: GetListService) { }
 
   ngOnInit(): void {
-    this.getListService.valueSeries.subscribe((data: Array<DataSeries>) => {
+    this.getListService.valueSeries.subscribe((data: Array<IDataSeries>) => {
       this.listSeries = data;
       this.filterListGenres(this.listSeries);
       this.filterListDates(this.listSeries);
@@ -46,6 +48,17 @@ export class FilterComponent implements OnInit {
       });
   }
 
+  public filter(value: string, id: string) {
+    let response = this.getListService.getResponse();
+
+    id === "genre" ? this.selectedGenre = value : this.selectedDate = value;
+
+    response = this.filterGenre(this.selectedGenre, response);
+    response = this.filterDate(this.selectedDate, response);
+
+    this.getListService.transferData(response);
+  }
+
   private filterName(value: string) {
     this.response = this.getListService.getResponse();
     if (!value) {
@@ -58,46 +71,43 @@ export class FilterComponent implements OnInit {
     this.getListService.transferData(this.changedResponse);
   }
 
-  private filterListGenres(value: Array<DataSeries>) {
+  private filterListGenres(value: Array<IDataSeries>) {
     if (this.firstCounter > 1) return;
-    let arrGenres: Array<string> = [ "Genre..."];
-    value.map(el => el.genre.map(item => arrGenres.push(item)));
+    let arrGenres: Array<string> = [ "All genres"];
+    value.forEach(el => el.genre.forEach(item => arrGenres.push(item)));
     this.listGenres = Array.from(new Set(arrGenres));
+    this.selectedGenre = this.listGenres[0];
     this.firstCounter++;
   }
 
-  private filterListDates(value: Array<DataSeries>) {
+  private filterListDates(value: Array<IDataSeries>) {
     if (this.secondCounter > 1) return;
     let arrDates: Array<any> = [];
-    value.map(el => arrDates.push(Number(el.premiere.slice(-4))));
+    value.forEach(el => arrDates.push(Number(el.premiere.slice(-4))));
     arrDates.sort((a, b) => a - b);
     this.listDates = Array.from(new Set(arrDates));
-    this.listDates.unshift("Date...");
+    this.listDates.unshift("All dates");
+    this.selectedDate = this.listDates[0];
     this.secondCounter++;
   }
 
-  public filterGenre(value: string) {
-    this.response = this.getListService.getResponse();
-    if (value === "Genre...") {
-      this.changedResponse = this.response;
+  private filterGenre(value: string, response: IDataSeries[]): IDataSeries[] {
+    if (value === "All genres") {
+      return response;
     } else {
-      this.changedResponse = this.response.filter(
+      return response.filter(
         (el) => el.genre.indexOf(value) >= 0
       );
     }
-    this.getListService.transferData(this.changedResponse);
   }
 
-  public filterDate(value: string) {
-    this.response = this.getListService.getResponse();
-    if (value === "Date...") {
-      this.changedResponse = this.response;
+  private filterDate(value: string, response: IDataSeries[]): IDataSeries[] {
+    if (value === "All dates") {
+      return response;
     } else {
-      this.changedResponse = this.response.filter(
+      return response.filter(
         (el) => el.premiere.indexOf(value) >= 0
       );
     }
-    this.getListService.transferData(this.changedResponse);
   }
-
 }
