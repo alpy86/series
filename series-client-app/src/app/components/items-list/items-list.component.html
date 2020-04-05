@@ -1,2 +1,9 @@
-<app-item *ngFor="let dataItem of listSeries" [dataSeries] = "dataItem"></app-item>
-<!-- *ngFor="let cardItem of searchedList" [cardData] = "cardItem" -->
+<app-item *ngFor="let dataItem of (listSeries | slice: lowValue : highValue)"
+          [dataSeries] = "dataItem">
+</app-item>
+<mat-paginator  [length]="listSeries.length"
+                pageSize=10
+                (page)="getPaginatorData($event)"
+                [pageSizeOptions]="[5, 10, 25]"
+                showFirstLastButtons="true">
+</mat-paginator>

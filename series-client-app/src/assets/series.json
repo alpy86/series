@@ -78,25 +78,25 @@
       "premiere": "20.11.2017"
     },
     {
-      "name": "The Terror",
-      "genre": [ "horror", "drama" ],
-      "season": 3,
-      "network": [ "AMC"],
-      "premiere": "20.11.2017"
+      "name": "Sherlock",
+      "genre": [ "crime", "drama", "mystery" ],
+      "season": 9,
+      "network": [ "FOX"],
+      "premiere": "15.02.2010"
     },
     {
-      "name": "The Terror",
-      "genre": [ "horror", "drama" ],
-      "season": 3,
-      "network": [ "AMC"],
-      "premiere": "20.11.2017"
+      "name": "The Wire",
+      "genre": [ "crime", "drama", "thriller" ],
+      "season": 10,
+      "network": [ "FOX"],
+      "premiere": "5.08.2002"
     },
     {
-      "name": "The Terror",
-      "genre": [ "horror", "drama" ],
+      "name": "The Sopranos",
+      "genre": [ "crime", "drama" ],
       "season": 3,
-      "network": [ "AMC"],
-      "premiere": "20.11.2017"
+      "network": [ "Netflix"],
+      "premiere": "10.11.1999"
     },
     {
       "name": "The Terror",

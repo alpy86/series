@@ -26,20 +26,16 @@
 </div>
 
 <div class="select">
-  <select>
-    <option value="hide">Genre</option>
-    <option>First select</option>
-    <option>Option</option>
-    <option>Option</option>
+    <select (change)="filterGenre($event.target.value)">
+    <!-- <option value="hide">Genre...</option> -->
+    <option *ngFor="let genre of listGenres">{{ genre }}</option>
   </select>
   <div class="select__arrow"></div>
 </div>
 
 <div class="select">
-  <select>
-    <option>First select</option>
-    <option>Option</option>
-    <option>Option</option>
+  <select (change)="filterDate($event.target.value)">
+    <option *ngFor="let date of listDates">{{ date }}</option>
   </select>
   <div class="select__arrow"></div>
 </div>
