@@ -27,12 +27,13 @@ export class ListHeaderComponent implements OnInit {
     if (type === ColumnsType.string) {
       changedResponse = this.sortDataByString(name, directionSort, this.listSeries);
     }
-    if (type === ColumnsType.number) {
+    else if (type === ColumnsType.number) {
       changedResponse = this.sortDataByNumber(name, directionSort, this.listSeries);
     }
-    if (type === ColumnsType.date) {
+    else if (type === ColumnsType.date) {
       changedResponse = this.sortDataByDate(name, directionSort, this.listSeries);
     }
+
     this.getListService.transferData(changedResponse);
   }
 

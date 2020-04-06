@@ -8,13 +8,12 @@ import { PageEvent } from '@angular/material/paginator';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
+
 export class ListComponent implements OnInit {
   public dataItem: IDataSeries;
   public listSeries: Array<IDataSeries>;
-
   public lowValue: number = 0;
   public highValue: number = 10;
-
 
   constructor(private getListService: GetListService) { }
 

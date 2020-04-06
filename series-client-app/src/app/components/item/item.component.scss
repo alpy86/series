@@ -1,37 +1,61 @@
 :host {
   display: flex;
-  margin: 1%;
+  margin: 1% 0;
+  box-sizing: border-box;
 }
 
 .box-name-genres {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
-  flex-basis: 35%;
+  min-width: 30%;
+}
+
+.series-name {
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  overflow: hidden;
 }
 
 .series-season,
 .series-premiere {
-  flex-basis: 20%;
-  text-align: center;
+  min-width: 22%;
 }
 
-.series-network {
-  flex-basis: 25%;
-  text-align: center;
+.series-networks {
+  min-width: 26%;
 }
 
 .list-values {
   padding-left: 5px;
+  overflow: hidden;
 
   &:first-child {
     padding-left: none;
   }
 }
 
+.column {
+  padding-left: 7px;
+}
+
+.genre {
+  margin-right: 5px;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
 .horror {
   background-color: red;
+}
+
+.crime {
+  background-color: silver;
+}
+
+.thriller {
+  background-color: aqua;
 }
 
 .drama {

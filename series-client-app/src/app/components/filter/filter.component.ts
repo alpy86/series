@@ -9,17 +9,19 @@ import { GetListService } from 'src/app/services/get-list.service';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
+
 export class FilterComponent implements OnInit {
   @ViewChild('inputTag', { static: false }) public inputElem: ElementRef;
 
   public searchName: string;
-  private response: IDataSeries[];
-  private changedResponse: IDataSeries[];
   public listSeries: Array<IDataSeries>;
   public listGenres: Array<string>;
   public listDates: Array<any>;
   public date: string | number;
   public genre: string;
+
+  private response: IDataSeries[];
+  private changedResponse: IDataSeries[];
   private firstCounter: number = 0;
   private secondCounter: number = 0;
   private selectedGenre: string;
@@ -73,7 +75,7 @@ export class FilterComponent implements OnInit {
 
   private filterListGenres(value: Array<IDataSeries>) {
     if (this.firstCounter > 1) return;
-    let arrGenres: Array<string> = [ "All genres"];
+    let arrGenres: Array<string> = [ "All genres" ];
     value.forEach(el => el.genre.forEach(item => arrGenres.push(item)));
     this.listGenres = Array.from(new Set(arrGenres));
     this.selectedGenre = this.listGenres[0];
@@ -92,22 +94,12 @@ export class FilterComponent implements OnInit {
   }
 
   private filterGenre(value: string, response: IDataSeries[]): IDataSeries[] {
-    if (value === "All genres") {
-      return response;
-    } else {
-      return response.filter(
-        (el) => el.genre.indexOf(value) >= 0
-      );
-    }
+    return value === "All genres" ?
+      response : response.filter((el) => el.genre.indexOf(value) >= 0);
   }
 
   private filterDate(value: string, response: IDataSeries[]): IDataSeries[] {
-    if (value === "All dates") {
-      return response;
-    } else {
-      return response.filter(
-        (el) => el.premiere.indexOf(value) >= 0
-      );
-    }
+    return value === "All dates" ?
+      response : response.filter((el) => el.premiere.indexOf(value) >= 0);
   }
 }

@@ -1,132 +1,90 @@
 $primary: orange;
-$secondary: yellow;
-$gray: gray;
 $white: white;
-
 
 :host {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+  margin-bottom: 10px;
 }
 
-.form-name {
-  background-color: orange;
-  padding-bottom: none;
-
-  .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
-
-  .label-name {
-    color: white;
-  }
-}
-
-.form-name {
+.filter {
   position: relative;
-  padding: 15px 0 0;
-  width: 50%;
+  min-width: 30%;
+  height: 35px;
+  color: $white;
+  background-color: $primary;
+
+  &:not(:last-child) {
+    margin-right: 1%;
+  }
+}
+
+.form-name {
+  border-bottom: 2px solid $primary;
 }
 
 .form-field {
   width: 100%;
-  border: 0;
-  border-bottom: 2px solid $gray;
-  outline: 0;
-  font-size: 1.3rem;
+  height: 100%;
+  font-size: 1.2rem;
   color: $white;
-  padding: 7px 0;
   background: transparent;
-  transition: border-color 0.2s;
+  border: 0;
 
   &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ .form-label {
-    cursor: text;
-    top: 20px;
-  }
-}
-
-.form-label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: $white;
-}
-
-.form-field:focus {
-  ~ .form-label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: .8rem;
+    padding-left: 10px;
     color: $white;
   }
-  padding-bottom: 6px;
-  border-bottom: 2px solid white;
+
+  &:hover {
+    background-color: lighten($primary, 10%);
+  }
 }
 
 .fa-search {
   position: absolute;
-  top: 50%;
-  left: 90%;
+  top: 30%;
+  left: 80%;
   color: $white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
-
-$color-white: #FFFFFF;
-$color-black: #000000;
-$color-light-grey: #E6E6E6;
-$color-grey: #CCCCCC;
-$color-dark-grey: #7B7B7B;
-$color-primary: #2AA1C0;
-$color-secondary: #0E647D;
-
-
-
-.select {
+.box-select {
   position: relative;
   display: inline-block;
-  margin-bottom: 15px;
   width: 100%;
 }
 
+.select {
+  display: inline-block;
+  width: 100%;
+  padding: 8px 15px;
+  color: $white;
+  font-size: 1.2rem;
+  background-color: $primary;
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
 
-  select {
-    display: inline-block;
-    width: 100%;
-    cursor: pointer;
-    padding: 10px 15px;
-    outline: 0;
-    border: 0;
-    border-radius: 0;
-    background-color: $color-light-grey;
-    color: $color-dark-grey;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    &::-ms-expand {
-      display: none;
-    }
-
-    &:hover,
-    &:focus {
-      color: $color-black;
-      background: $color-grey;
-    }
-
+  &::-ms-expand {
+    display: none;
   }
 
-.select__arrow {
+  &:hover {
+    background-color: lighten($primary, 10%);
+  }
+
+  .option:hover {
+    background-color: lighten($primary, 10%);
+  }
+}
+
+.select-arrow {
   position: absolute;
   top: 16px;
   right: 15px;
@@ -135,11 +93,10 @@ $color-secondary: #0E647D;
   pointer-events: none;
   border-style: solid;
   border-width: 8px 5px 0 5px;
-  border-color: $color-dark-grey transparent transparent transparent;
+  border-color: darken($primary, 20%) transparent transparent transparent;
 
   .select select:hover ~ &,
   .select select:focus ~ & {
-    border-top-color: $color-black;
+    border-top-color: darken($primary, 20%);
   }
 }
-
